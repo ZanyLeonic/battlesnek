@@ -119,7 +119,7 @@ public class Board {
         switch (direction) {
             case UP:
                 temp = tileToGrid(tile) + width;
-                if (temp <= 0) {
+                if (temp >= grid.length) {
                     return;
                 }
                 return;
@@ -131,7 +131,7 @@ public class Board {
                 break;
             case DOWN:
                 temp = tileToGrid(tile) - width;
-                if (temp >= grid.length) {
+                if (temp <= 0) {
                     return;
                 }
                 break;
@@ -153,7 +153,7 @@ public class Board {
         switch (direction) {
             case UP:
                 temp = tileToGrid(tile) + width;
-                if (temp <= 0) {
+                if (temp >= grid.length) {
                     return;
                 }
                 return;
@@ -165,7 +165,7 @@ public class Board {
                 break;
             case DOWN:
                 temp = tileToGrid(tile) - width;
-                if (temp >= grid.length) {
+                if (temp <= 0) {
                     return;
                 }
                 break;
