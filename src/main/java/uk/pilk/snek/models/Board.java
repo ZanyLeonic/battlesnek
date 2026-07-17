@@ -14,7 +14,8 @@ public class Board {
     }
 
     private int pointToBoard(int x, int y){
-        return
+        return 1;
+
     }
 
 }
