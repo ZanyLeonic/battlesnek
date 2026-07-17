@@ -16,7 +16,6 @@ public class Board {
 
     private final int height, width;
 
-    private List<Tile> tiles;
     private List<Tile> food;
     private List<Tile> hazards;
     private List<Snek> snakes;
@@ -25,9 +24,12 @@ public class Board {
 
     public void createTiled() {
         grid = new Tile[height * width];
-        for (Tile tile : tiles) {
-            grid[tileToGrid(tile)] = tile;
+        for(int pos = 0; pos < height * width; pos++) {
+            grid[pos] = new Tile(pos%width,pos/width);
         }
+        /*for (Tile tile : tiles) {
+            grid[tileToGrid(tile)] = tile;
+        }*/
     }
 
     public void populateDesires(Snek self) {
