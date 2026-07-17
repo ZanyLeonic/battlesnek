@@ -26,6 +26,8 @@ dependencies {
 	testCompileOnly("org.projectlombok:lombok")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testAnnotationProcessor("org.projectlombok:lombok")
+	implementation("club.minnced:discord-webhooks:0.8.4")
+
 }
 
 tasks.withType<Test> {
