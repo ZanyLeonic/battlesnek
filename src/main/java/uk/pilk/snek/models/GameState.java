@@ -5,9 +5,9 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class GameBoard {
+public class GameState {
     private String id;
-    private String map;
+    private Board map;
     private long timeout;
     private String source;
     private RuleInfo ruleset;

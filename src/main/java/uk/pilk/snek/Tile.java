@@ -1,11 +1,12 @@
 package uk.pilk.snek;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
 public class Tile {
 
-    private int x,y;
-
-    public Tile(int x, int y){
-        this.x = x;
-        this.y = y;
-    }
+    private final int x,y;
 }
