@@ -5,10 +5,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class SnakeCustomisations {
-
-    private String color;
-    private String head;
-    private String tail;
-
+public class RoyaleSettings {
+    private int shrinkEveryNTurns;
 }

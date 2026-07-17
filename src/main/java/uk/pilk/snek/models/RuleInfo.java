@@ -8,4 +8,5 @@ import lombok.Data;
 public class RuleInfo {
     private String name;
     private String version;
+    private RulesetSettings settings;
 }
