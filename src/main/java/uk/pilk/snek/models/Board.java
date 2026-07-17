@@ -82,7 +82,7 @@ public class Board {
         }
 
         temp = headPos + 1;
-        if (headPos % width != 0) {
+        if (headPos % width != 0 && temp < grid.length) {
             temp = grid[temp].getWeight();
             if (favourWeight < temp) {
                 favourWeight = temp;
@@ -100,7 +100,7 @@ public class Board {
         }
 
         temp = headPos - 1;
-        if (temp % width != width) {
+        if (temp % width != width && temp >= 0) {
             temp = grid[temp].getWeight();
             if (favourWeight < temp) {
                 favoured = "left";
@@ -165,13 +165,13 @@ public class Board {
                 break;
             case DOWN:
                 temp = tileToGrid(tile) - width;
-                if (temp <= 0) {
+                if (temp < 0) {
                     return;
                 }
                 break;
             case LEFT:
                 temp = tileToGrid(tile) - 1;
-                if (temp % width == 0 || temp <= 0) {
+                if (temp % width == 0 || temp < 0) {
                     return;
                 }
                 break;
