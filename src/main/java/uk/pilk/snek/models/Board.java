@@ -11,7 +11,7 @@ import java.util.List;
 public class Board {
 
     private enum Dir {
-        UP, RIGHT, DOWN, LEFT;
+        UP, RIGHT, DOWN, LEFT
     }
 
     private final int height, width;
@@ -100,7 +100,6 @@ public class Board {
         if (temp % width != 0) {
             temp = grid[temp].getWeight();
             if (favourWeight > temp) {
-                favourWeight = temp;
                 favoured = "left";
             }
         }
