@@ -41,7 +41,7 @@ public class Board {
         for (Snek snake : snakes) {
             //Remove desire of crashing
             for (Tile tile : snake.getPositions()) {
-                grid[tileToGrid(tile)].setWeight(-1);
+                grid[tileToGrid(tile)].setImpassable();
             }
 
             //No need to look at anything else if it's yourself?
@@ -50,10 +50,10 @@ public class Board {
             }
             //Desire to go head to head or not
             if (snake.getLength() >= self.getLength()) {
-                safeGridSet(snake.getHead(), Dir.UP, -2);
-                safeGridSet(snake.getHead(), Dir.RIGHT, -3);
-                safeGridSet(snake.getHead(), Dir.DOWN, -4);
-                safeGridSet(snake.getHead(), Dir.LEFT, -5);
+                safeGridModify(snake.getHead(), Dir.UP, -5);
+                safeGridModify(snake.getHead(), Dir.RIGHT, -5);
+                safeGridModify(snake.getHead(), Dir.DOWN, -5);
+                safeGridModify(snake.getHead(), Dir.LEFT, -5);
             }
         }
     }
@@ -70,38 +70,51 @@ public class Board {
      */
     public String returnChosenDirection(Tile head) {
         String favoured = "error";
-        int favourWeight = -1, headPos = tileToGrid(head), temp;
+        int favourWeight = Integer.MIN_VALUE, headPos = tileToGrid(head), temp;
+        Tile considered;
 
         if (head.getY() != 0) {
-            temp = grid[headPos - width].getWeight();
-            if (favourWeight < temp) {
-                favourWeight = temp;
-                favoured = "down";
+            considered = grid[headPos - width];
+            if(!considered.isImpassable()) {
+                temp = considered.getWeight();
+                if (favourWeight < temp) {
+                    favourWeight = temp;
+                    favoured = "down";
+                }
             }
         }
 
         temp = headPos + 1;
         if (head.getX() != width-1 && temp < grid.length) {
-            temp = grid[temp].getWeight();
-            if (favourWeight < temp) {
-                favourWeight = temp;
-                favoured = "right";
+            considered = grid[temp];
+            if(!considered.isImpassable()) {
+                temp = grid[temp].getWeight();
+                if (favourWeight < temp) {
+                    favourWeight = temp;
+                    favoured = "right";
+                }
             }
         }
 
         if (head.getY() != height-1) {
-            temp = grid[headPos + width].getWeight();
-            if (favourWeight < temp) {
-                favourWeight = temp;
-                favoured = "up";
+            considered = grid[headPos + width];
+            if(!considered.isImpassable()) {
+                temp = grid[headPos + width].getWeight();
+                if (favourWeight < temp) {
+                    favourWeight = temp;
+                    favoured = "up";
+                }
             }
         }
 
         temp = headPos - 1;
         if (head.getX() != 0 && temp >= 0) {
-            temp = grid[temp].getWeight();
-            if (favourWeight < temp) {
-                favoured = "left";
+            considered = grid[temp];
+            if(!considered.isImpassable()) {
+                temp = grid[temp].getWeight();
+                if (favourWeight < temp) {
+                    favoured = "left";
+                }
             }
         }
 
