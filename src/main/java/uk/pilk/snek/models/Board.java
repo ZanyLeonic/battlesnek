@@ -9,7 +9,7 @@ public class Board {
     private Tile[] tiles;
     private int[] food;
     private Hazard[] hazards;
-    private int[] snakeHeads;
+    private Snek[] snakes;
 
     public Board(int x, int y) {
         tiles = new Tile[x * y];
