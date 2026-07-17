@@ -18,7 +18,7 @@ public class Snek {
     @JsonProperty("body")
     private List<Tile> positions;
     private String latency;
-    private String length;
+    private int length;
     private String shout;
     private String squad;
     @JsonProperty("customizations")
@@ -26,7 +26,7 @@ public class Snek {
 
     public String findNext(Board board){
         board.createTiled();
-
+        board.populateDesires(this);
         return board.returnChosenDirection(head);
     }
 }

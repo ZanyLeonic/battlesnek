@@ -9,5 +9,19 @@ import lombok.NoArgsConstructor;
 public class Tile {
 
     private final int x,y;
-    private int weight = -1;
+    private int weight = 0;
+
+    public void setWeight(int weight) {
+        if(weight < 0) {
+            return;
+        }
+        this.weight = weight;
+    }
+
+    public void modifyWeight(int modification){
+        if(weight < 0) {
+            return;
+        }
+        this.weight += modification;
+    }
 }
