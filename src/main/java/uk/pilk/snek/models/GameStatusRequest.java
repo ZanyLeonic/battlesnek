@@ -8,6 +8,6 @@ import lombok.Data;
 public class GameStatusRequest {
     private GameState game;
     private int turn;
-    private GameState board;
+    private Board board;
     private Snek you;
 }

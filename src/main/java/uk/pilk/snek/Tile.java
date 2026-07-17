@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 public class Tile {
 
     private final int x,y;
+    private int weight = -1;
 }

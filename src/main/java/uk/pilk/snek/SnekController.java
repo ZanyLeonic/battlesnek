@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import uk.pilk.snek.models.Board;
 import uk.pilk.snek.models.GameStatusRequest;
 import uk.pilk.snek.models.MoveOutput;
 import uk.pilk.snek.models.SnekInfo;
@@ -19,12 +20,13 @@ public class SnekController {
 
     @PostMapping("/start")
     void SnekStart(@RequestParam GameStatusRequest startInfo) {
-
     }
 
     @PostMapping("/move")
     MoveOutput SnekMove(@RequestParam GameStatusRequest moveInfo) {
-        return new MoveOutput("right", "yeet");
+        String move = moveInfo.getYou().findNext(moveInfo.getBoard());
+
+        return new MoveOutput(move, "yeet");
     }
 
     @PostMapping("/end")
