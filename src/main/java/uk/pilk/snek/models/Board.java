@@ -96,7 +96,6 @@ public class Board {
         HashSet<Tile> set = new HashSet<>();
         PriorityQueue<IntPair> toDo = new  PriorityQueue<>();
         toDo.add(new IntPair(start, foodMax));
-        set.add(start);
         Tile temp;
         IntPair pair;
         while(!toDo.isEmpty()) {
@@ -105,6 +104,7 @@ public class Board {
                 continue;
             }
             pair.getPos().modifyWeight(pair.getVal(), foodMax);
+            set.add(pair.getPos());
 
             temp = getTile(pair.getPos(),Dir.UP);
             if(temp != null) {
