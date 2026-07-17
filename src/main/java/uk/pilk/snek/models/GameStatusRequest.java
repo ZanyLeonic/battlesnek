@@ -1,13 +1,11 @@
-package uk.pilk.snek.models.ingest;
+package uk.pilk.snek.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import uk.pilk.snek.models.GameState;
-import uk.pilk.snek.models.Snek;
 
 @Data
 @AllArgsConstructor
-public class MoveSnek {
+public class GameStatusRequest {
     private GameState game;
     private int turn;
     private GameState board;
