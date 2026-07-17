@@ -77,7 +77,7 @@ public class Board {
             temp = grid[temp].getWeight();
             if (favourWeight > temp) {
                 favourWeight = temp;
-                favoured = "up";
+                favoured = "down";
             }
         }
 
@@ -95,7 +95,7 @@ public class Board {
             temp = grid[temp].getWeight();
             if (favourWeight > temp) {
                 favourWeight = temp;
-                favoured = "down";
+                favoured = "up";
             }
         }
 
@@ -118,7 +118,7 @@ public class Board {
         int temp;
         switch (direction) {
             case UP:
-                temp = tileToGrid(tile) - width;
+                temp = tileToGrid(tile) + width;
                 if (temp <= 0) {
                     return;
                 }
@@ -130,7 +130,7 @@ public class Board {
                 }
                 break;
             case DOWN:
-                temp = tileToGrid(tile) + width;
+                temp = tileToGrid(tile) - width;
                 if (temp >= grid.length) {
                     return;
                 }
@@ -152,7 +152,7 @@ public class Board {
         int temp;
         switch (direction) {
             case UP:
-                temp = tileToGrid(tile) - width;
+                temp = tileToGrid(tile) + width;
                 if (temp <= 0) {
                     return;
                 }
@@ -164,7 +164,7 @@ public class Board {
                 }
                 break;
             case DOWN:
-                temp = tileToGrid(tile) + width;
+                temp = tileToGrid(tile) - width;
                 if (temp >= grid.length) {
                     return;
                 }
