@@ -125,7 +125,7 @@ public class Board {
                 return;
             case RIGHT:
                 temp = tileToGrid(tile) + 1;
-                if (temp / width + 1 == width) {
+                if (temp / width + 1 == width || temp >= grid.length) {
                     return;
                 }
                 break;
@@ -137,7 +137,7 @@ public class Board {
                 break;
             case LEFT:
                 temp = tileToGrid(tile) - 1;
-                if (temp % width == 0) {
+                if (temp % width == 0 || temp <= 0) {
                     return;
                 }
                 break;
@@ -159,7 +159,7 @@ public class Board {
                 return;
             case RIGHT:
                 temp = tileToGrid(tile) + 1;
-                if (temp / width + 1 == width) {
+                if (temp / width + 1 == width || temp >= grid.length) {
                     return;
                 }
                 break;
@@ -171,7 +171,7 @@ public class Board {
                 break;
             case LEFT:
                 temp = tileToGrid(tile) - 1;
-                if (temp % width == 0) {
+                if (temp % width == 0 || temp <= 0) {
                     return;
                 }
                 break;
