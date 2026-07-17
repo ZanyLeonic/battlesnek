@@ -72,9 +72,8 @@ public class Board {
         String favoured = "error";
         int favourWeight = -1, headPos = tileToGrid(head), temp;
 
-        temp = headPos - width;
-        if (temp > 0) {
-            temp = grid[temp].getWeight();
+        if (head.getY() != 0) {
+            temp = grid[headPos - width].getWeight();
             if (favourWeight < temp) {
                 favourWeight = temp;
                 favoured = "down";
@@ -82,7 +81,7 @@ public class Board {
         }
 
         temp = headPos + 1;
-        if (headPos % width != 0 && temp < grid.length) {
+        if (head.getX()-1 != width && temp < grid.length) {
             temp = grid[temp].getWeight();
             if (favourWeight < temp) {
                 favourWeight = temp;
@@ -90,9 +89,8 @@ public class Board {
             }
         }
 
-        temp = headPos + width;
-        if (temp < grid.length) {
-            temp = grid[temp].getWeight();
+        if (head.getY() != height) {
+            temp = grid[headPos + width].getWeight();
             if (favourWeight < temp) {
                 favourWeight = temp;
                 favoured = "up";
@@ -100,7 +98,7 @@ public class Board {
         }
 
         temp = headPos - 1;
-        if (temp % width != width && temp >= 0) {
+        if (head.getX() != 0 && temp >= 0) {
             temp = grid[temp].getWeight();
             if (favourWeight < temp) {
                 favoured = "left";
