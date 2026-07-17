@@ -75,7 +75,7 @@ public class Board {
         temp = headPos - width;
         if (temp > 0) {
             temp = grid[temp].getWeight();
-            if (favourWeight > temp) {
+            if (favourWeight < temp) {
                 favourWeight = temp;
                 favoured = "down";
             }
@@ -84,7 +84,7 @@ public class Board {
         temp = headPos + 1;
         if (headPos / width + 1 != width) {
             temp = grid[temp].getWeight();
-            if (favourWeight > temp) {
+            if (favourWeight < temp) {
                 favourWeight = temp;
                 favoured = "right";
             }
@@ -93,7 +93,7 @@ public class Board {
         temp = headPos + width;
         if (temp < grid.length) {
             temp = grid[temp].getWeight();
-            if (favourWeight > temp) {
+            if (favourWeight < temp) {
                 favourWeight = temp;
                 favoured = "up";
             }
@@ -102,7 +102,7 @@ public class Board {
         temp = headPos - 1;
         if (temp % width != 0) {
             temp = grid[temp].getWeight();
-            if (favourWeight > temp) {
+            if (favourWeight < temp) {
                 favoured = "left";
             }
         }
