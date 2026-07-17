@@ -50,10 +50,10 @@ public class Board {
             }
             //Desire to go head to head or not
             if (snake.getLength() >= self.getLength()) {
-                safeGridSet(snake.getHead(), Dir.UP, -1);
-                safeGridSet(snake.getHead(), Dir.RIGHT, -1);
-                safeGridSet(snake.getHead(), Dir.DOWN, -1);
-                safeGridSet(snake.getHead(), Dir.LEFT, -1);
+                safeGridSet(snake.getHead(), Dir.UP, -2);
+                safeGridSet(snake.getHead(), Dir.RIGHT, -3);
+                safeGridSet(snake.getHead(), Dir.DOWN, -4);
+                safeGridSet(snake.getHead(), Dir.LEFT, -5);
             }
         }
     }
