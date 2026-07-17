@@ -1,10 +1,7 @@
 package uk.pilk.snek;
 
 import jakarta.websocket.server.PathParam;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import uk.pilk.snek.models.Board;
 import uk.pilk.snek.models.GameStatusRequest;
@@ -25,19 +22,19 @@ public class SnekController {
     }
 
     @PostMapping("/start")
-    void SnekStart(@RequestParam GameStatusRequest startInfo) {
+    void SnekStart(@RequestBody GameStatusRequest startInfo) {
         history.add(new ArrayList<>());
     }
 
     @PostMapping("/move")
-    MoveOutput SnekMove(@RequestParam GameStatusRequest moveInfo) {
+    MoveOutput SnekMove(@RequestBody GameStatusRequest moveInfo) {
         String move = moveInfo.getYou().findNext(moveInfo.getBoard());
         history.get(gameCount).add(moveInfo.getBoard());
         return new MoveOutput(move, "yeet");
     }
 
     @PostMapping("/end")
-    void SnekGameOver(@RequestParam GameStatusRequest gameOver) {
+    void SnekGameOver(@RequestBody GameStatusRequest gameOver) {
         gameCount++;
     }
 
