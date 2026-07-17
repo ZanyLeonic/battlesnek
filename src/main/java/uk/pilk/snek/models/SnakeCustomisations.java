@@ -1,5 +1,6 @@
 package uk.pilk.snek.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -7,7 +8,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class SnakeCustomisations {
 
-    private String color;
+    @JsonProperty("colour")
+    private String colour;
     private String head;
     private String tail;
 
