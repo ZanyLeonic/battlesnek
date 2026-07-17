@@ -1,5 +1,6 @@
 package uk.pilk.snek;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,8 @@ import lombok.NoArgsConstructor;
 public class Tile {
 
     private final int x,y;
+
+    @JsonIgnore
     private int weight = 0;
 
     public void setWeight(int weight) {
