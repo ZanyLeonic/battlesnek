@@ -103,19 +103,19 @@ public class Board {
 
             temp = getTile(pair.getPos(),Dir.UP);
             if(temp != null) {
-                recFoodWeight(set, temp, pair.getVal()-1);
+                toDo.add(new IntPair(temp, pair.getVal()-1));
             }
             temp = getTile(pair.getPos(),Dir.RIGHT);
             if(temp != null) {
-                recFoodWeight(set, temp, pair.getVal()-1);
+                toDo.add(new IntPair(temp, pair.getVal()-1));
             }
             temp = getTile(pair.getPos(),Dir.DOWN);
             if(temp != null) {
-                recFoodWeight(set, temp, pair.getVal()-1);
+                toDo.add(new IntPair(temp, pair.getVal()-1));
             }
             temp = getTile(pair.getPos(),Dir.LEFT);
             if(temp != null) {
-                recFoodWeight(set, temp, pair.getVal()-1);
+                toDo.add(new IntPair(temp, pair.getVal()-1));
             }
         }
     }
