@@ -8,6 +8,6 @@ public class SnekController {
 
     @GetMapping("/")
     SnekInfo SnakeInfo() {
-        return new SnekInfo("1", "Pilk", "#888888", "default", "default")   
+        return new SnekInfo(1, "Pilk", "#888888", "default", "default");
     }
 }
