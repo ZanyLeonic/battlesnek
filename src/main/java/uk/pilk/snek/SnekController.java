@@ -39,7 +39,7 @@ public class SnekController {
     }
 
     @GetMapping("/gameHistory/{id}")
-    ArrayList<Board> getHistory(@PathParam("id") int id) {
+    ArrayList<Board> getHistory(@PathVariable int id) {
         if(id > history.size()) {
             return null;
         }
