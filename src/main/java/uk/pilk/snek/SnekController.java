@@ -3,6 +3,8 @@ package uk.pilk.snek;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import uk.pilk.snek.models.SnekInfo;
+
 @RestController
 public class SnekController {
 
