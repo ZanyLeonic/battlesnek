@@ -38,7 +38,7 @@ public class SnekController {
     MoveOutput SnekMove(@RequestBody GameStatusRequest moveInfo) {
         String move = moveInfo.getYou().findNext(moveInfo.getBoard());
         history.get(gameCount).add(moveInfo.getBoard());
-        return new MoveOutput(move, "yeet");
+        return new MoveOutput(move, move);
     }
 
     @PostMapping("/end")
