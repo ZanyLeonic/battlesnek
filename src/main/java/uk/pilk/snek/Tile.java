@@ -13,14 +13,14 @@ public class Tile {
     private int weight = 0;
 
     public void setWeight(int weight) {
-        if(weight < 0) {
+        if(this.weight < 0) {
             return;
         }
         this.weight = weight;
     }
 
     public void modifyWeight(int modification){
-        if(weight < 0) {
+        if(this.weight < 0) {
             return;
         }
         this.weight += modification;
