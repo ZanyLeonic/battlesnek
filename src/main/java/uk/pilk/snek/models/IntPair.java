@@ -17,6 +17,6 @@ public class IntPair implements Comparable<IntPair>{
 
     @Override
     public int compareTo(@NonNull IntPair intPair) {
-        return Integer.compare(this.val, intPair.val);
+        return -Integer.compare(this.val, intPair.val);
     }
 }
