@@ -8,6 +8,8 @@ public class Board {
 
     private Tile[] tiles;
     private int[] food;
+    private Hazard[] hazards;
+    private int[] snakeHeads;
 
     public Board(int x, int y) {
         tiles = new Tile[x * y];
