@@ -28,7 +28,7 @@ public class Tile {
         if(impassable || weight > max) {
             return;
         }
-        this.weight = Math.max(this.weight + modification, max);
+        this.weight = Math.min(this.weight + modification, max);
     }
 
     public void modifyWeight(int modification){
