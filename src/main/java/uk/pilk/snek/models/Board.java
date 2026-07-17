@@ -21,9 +21,10 @@ public class Board {
     private List<Tile> hazards;
     private List<Snek> snakes;
 
-    private Tile[] grid = new Tile[height * width];
+    private Tile[] grid;
 
     public void createTiled() {
+        grid = new Tile[height * width];
         for (Tile tile : tiles) {
             grid[tileToGrid(tile)] = tile;
         }
