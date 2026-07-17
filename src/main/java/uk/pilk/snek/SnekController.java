@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.server.ResponseStatusException;
 import tools.jackson.databind.exc.MismatchedInputException;
-import uk.pilk.snek.models.Board;
-import uk.pilk.snek.models.GameStatusRequest;
-import uk.pilk.snek.models.MoveOutput;
-import uk.pilk.snek.models.SnekInfo;
+import uk.pilk.snek.models.*;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -36,7 +33,13 @@ public class SnekController {
 
     @PostMapping("/move")
     MoveOutput SnekMove(@RequestBody GameStatusRequest moveInfo) {
-        String move = moveInfo.getYou().findNext(moveInfo.getBoard());
+        Board board = moveInfo.getBoard();
+        board.createTiled();
+
+        Snek snek = moveInfo.getYou();
+        board.populateDesires(snek);
+
+        String move = snek.findNext(board);
         history.get(gameCount).add(moveInfo.getBoard());
         return new MoveOutput(move, move);
     }

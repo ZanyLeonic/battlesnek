@@ -25,8 +25,6 @@ public class Snek {
     private SnakeCustomisations customisations;
 
     public String findNext(Board board){
-        board.createTiled();
-        board.populateDesires(this);
         return board.returnChosenDirection(head);
     }
 }
