@@ -1,4 +1,4 @@
-package uk.pilk.snek;
+package uk.pilk.snek.models;
 
 public class Snek {
 
