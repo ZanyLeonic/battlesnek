@@ -6,12 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 public class Tile {
 
     private final int x,y;
 
-    @JsonIgnore
     private int weight = 0;
 
     public void setWeight(int weight) {
