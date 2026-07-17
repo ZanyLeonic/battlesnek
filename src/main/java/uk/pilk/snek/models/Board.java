@@ -6,6 +6,7 @@ import uk.pilk.snek.Tile;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.PriorityQueue;
 
 @Data
 @AllArgsConstructor
@@ -63,7 +64,7 @@ public class Board {
 
     private void populateFoodDesire(Snek self) {
         for(Tile tile : food) {
-            recFoodWeight(new HashSet<>(), tile, foodMax);
+            iterFoodWeight(tile);
         }
     }
 
@@ -88,6 +89,34 @@ public class Board {
         temp = getTile(current,Dir.LEFT);
         if(temp != null) {
             recFoodWeight(set, temp, val-1);
+        }
+    }
+
+    private void iterFoodWeight(Tile start){
+        HashSet<Tile> set = new HashSet<>();
+        PriorityQueue<IntPair> toDo = new  PriorityQueue<>();
+        toDo.add(new IntPair(start, foodMax));
+        Tile temp;
+        IntPair pair;
+        while(!toDo.isEmpty()) {
+            pair = toDo.poll();
+
+            temp = getTile(pair.getPos(),Dir.UP);
+            if(temp != null) {
+                recFoodWeight(set, temp, pair.getVal()-1);
+            }
+            temp = getTile(pair.getPos(),Dir.RIGHT);
+            if(temp != null) {
+                recFoodWeight(set, temp, pair.getVal()-1);
+            }
+            temp = getTile(pair.getPos(),Dir.DOWN);
+            if(temp != null) {
+                recFoodWeight(set, temp, pair.getVal()-1);
+            }
+            temp = getTile(pair.getPos(),Dir.LEFT);
+            if(temp != null) {
+                recFoodWeight(set, temp, pair.getVal()-1);
+            }
         }
     }
 
