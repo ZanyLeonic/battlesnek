@@ -21,6 +21,7 @@ public class Snek {
     private String length;
     private String shout;
     private String squad;
-
+    @JsonProperty("customizations")
+    private SnakeCustomisations customisations;
 
 }
