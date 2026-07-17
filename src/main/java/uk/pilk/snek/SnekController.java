@@ -10,8 +10,13 @@ import uk.pilk.snek.models.GameStatusRequest;
 import uk.pilk.snek.models.MoveOutput;
 import uk.pilk.snek.models.SnekInfo;
 
+import java.util.ArrayList;
+
 @RestController
 public class SnekController {
+
+    int gameCount = 0;
+    ArrayList<ArrayList<Board>> history = new ArrayList<>();
 
     @GetMapping("/")
     SnekInfo SnakeInfo() {
@@ -20,17 +25,23 @@ public class SnekController {
 
     @PostMapping("/start")
     void SnekStart(@RequestParam GameStatusRequest startInfo) {
+        history.add(new ArrayList<>());
     }
 
     @PostMapping("/move")
     MoveOutput SnekMove(@RequestParam GameStatusRequest moveInfo) {
         String move = moveInfo.getYou().findNext(moveInfo.getBoard());
-
+        history.get(gameCount).add(moveInfo.getBoard());
         return new MoveOutput(move, "yeet");
     }
 
     @PostMapping("/end")
     void SnekGameOver(@RequestParam GameStatusRequest gameOver) {
+        gameCount++;
+    }
 
+    @GetMapping("/gameHistory")
+    ArrayList<ArrayList<Board>> getHistory() {
+        return history;
     }
 }
