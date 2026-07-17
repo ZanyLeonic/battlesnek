@@ -45,7 +45,7 @@ public class Board {
             }
 
             //No need to look at anything else if it's yourself?
-            if (snake == self) {
+            if (snake.getId().equals(self.getId())) {
                 continue;
             }
             //Desire to go head to head or not
