@@ -1,5 +1,6 @@
 package uk.pilk.snek;
 
+import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,8 +41,8 @@ public class SnekController {
         gameCount++;
     }
 
-    @GetMapping("/gameHistory")
-    ArrayList<ArrayList<Board>> getHistory() {
-        return history;
+    @GetMapping("/gameHistory/{id}")
+    ArrayList<Board> getHistory(@PathParam("id") int id) {
+        return history.get(id);
     }
 }
