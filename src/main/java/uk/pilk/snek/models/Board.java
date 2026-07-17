@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import uk.pilk.snek.Tile;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Data
@@ -58,8 +59,36 @@ public class Board {
         }
     }
 
-    private void populateFoodDesire(Snek self) {
+    private static int foodMax = 100;
 
+    private void populateFoodDesire(Snek self) {
+        for(Tile tile : food) {
+            recFoodWeight(new HashSet<>(), tile, foodMax);
+        }
+    }
+
+    private void recFoodWeight(HashSet<Tile> set, Tile current, int val){
+        if(set.contains(current)) {
+            return;
+        }
+        current.modifyWeight(val, foodMax);
+        set.add(current);
+        Tile temp = getTile(current,Dir.UP);
+        if(temp != null) {
+            recFoodWeight(set, temp, val-1);
+        }
+        temp = getTile(current,Dir.RIGHT);
+        if(temp != null) {
+            recFoodWeight(set, temp, val-1);
+        }
+        temp = getTile(current,Dir.DOWN);
+        if(temp != null) {
+            recFoodWeight(set, temp, val-1);
+        }
+        temp = getTile(current,Dir.LEFT);
+        if(temp != null) {
+            recFoodWeight(set, temp, val-1);
+        }
     }
 
     /**
@@ -133,7 +162,7 @@ public class Board {
                 if (temp >= grid.length) {
                     return;
                 }
-                return;
+                break;
             case RIGHT:
                 temp = tileToGrid(tile) + 1;
                 if (temp / width + 1 == width || temp >= grid.length) {
@@ -160,6 +189,10 @@ public class Board {
     }
 
     private void safeGridModify(Tile tile, Dir direction, int mod) {
+        safeGridModify(tile, direction, mod, Integer.MAX_VALUE);
+    }
+
+    private void safeGridModify(Tile tile, Dir direction, int mod, int max) {
         int temp;
         switch (direction) {
             case UP:
@@ -167,7 +200,7 @@ public class Board {
                 if (temp >= grid.length) {
                     return;
                 }
-                return;
+                break;
             case RIGHT:
                 temp = tileToGrid(tile) + 1;
                 if (temp / width + 1 == width || temp >= grid.length) {
@@ -188,8 +221,40 @@ public class Board {
                 break;
             default:
                 return;
-
         }
-        grid[temp].modifyWeight(mod);
+        grid[temp].modifyWeight(mod, max);
+    }
+
+    private Tile getTile(Tile tile, Dir direction){
+        int temp;
+        switch (direction) {
+            case UP:
+                temp = tileToGrid(tile) + width;
+                if (temp >= grid.length) {
+                    return null;
+                }
+                break;
+            case RIGHT:
+                temp = tileToGrid(tile) + 1;
+                if (temp / width + 1 == width || temp >= grid.length) {
+                    return null;
+                }
+                break;
+            case DOWN:
+                temp = tileToGrid(tile) - width;
+                if (temp < 0) {
+                    return null;
+                }
+                break;
+            case LEFT:
+                temp = tileToGrid(tile) - 1;
+                if (temp % width == 0 || temp < 0) {
+                    return null;
+                }
+                break;
+            default:
+                return null;
+        }
+        return grid[temp];
     }
 }
