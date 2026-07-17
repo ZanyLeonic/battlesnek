@@ -69,7 +69,7 @@ public class Board {
      * @return Chosen direction to move
      */
     public String returnChosenDirection(Tile head) {
-        String favoured = "";
+        String favoured = "error";
         int favourWeight = -1, headPos = tileToGrid(head), temp;
 
         temp = headPos - width;
