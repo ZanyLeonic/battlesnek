@@ -9,7 +9,7 @@
         <th:block th:each="tiles : ${board.mapToRows()}">
             <tr>
                 <th:block th:each="tile : ${tiles}">
-                    <td th:text="${tile.weight}" th:style="'background-color: rgb(' + (${tile.weight} *2.5) + ',0,0)'"></td>
+                    <td th:text="${tile.weight}" th:style="'background-color: rgb(' + (${tile.weight} *2.5) + ' 0 0)'"></td>
                 </th:block>
             </tr>
         </th:block>
