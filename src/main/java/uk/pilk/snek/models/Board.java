@@ -111,7 +111,7 @@ public class Board {
             if(set.contains(pair.getPos())){
                 continue;
             }
-            pair.getPos().modifyWeight(pair.getVal(), foodMax);
+            pair.getPos().modifyWeight(pair.getVal(), pair.getVal());
             set.add(pair.getPos());
 
             temp = getTile(pair.getPos(),Dir.UP);
