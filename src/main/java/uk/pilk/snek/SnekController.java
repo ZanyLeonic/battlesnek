@@ -21,6 +21,7 @@ public class SnekController {
 
     int gameCount = 0;
     ArrayList<ArrayList<Board>> history = new ArrayList<>();
+    Direction lastMove = null;
 
     @GetMapping("/")
     SnekInfo SnakeInfo() {
@@ -42,6 +43,10 @@ public class SnekController {
 
         Direction move = snek.findNext(board);
         history.get(gameCount).add(moveInfo.getBoard());
+        if(move == null) {
+            return new MoveOutput(lastMove, "Last move...");
+        }
+        lastMove = move;
         return new MoveOutput(move, move.toString());
     }
 
