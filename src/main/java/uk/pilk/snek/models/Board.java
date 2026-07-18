@@ -115,19 +115,19 @@ public class Board {
             set.add(pair.getPos());
 
             temp = getTile(pair.getPos(),Dir.UP);
-            if(temp != null) {
+            if(temp != null && !temp.isImpassable()) {
                 toDo.add(new ThisIsNotAnIntPairRenameItPlease(temp, pair.getVal()-1));
             }
             temp = getTile(pair.getPos(),Dir.RIGHT);
-            if(temp != null) {
+            if(temp != null && !temp.isImpassable()) {
                 toDo.add(new ThisIsNotAnIntPairRenameItPlease(temp, pair.getVal()-1));
             }
             temp = getTile(pair.getPos(),Dir.DOWN);
-            if(temp != null) {
+            if(temp != null && !temp.isImpassable()) {
                 toDo.add(new ThisIsNotAnIntPairRenameItPlease(temp, pair.getVal()-1));
             }
             temp = getTile(pair.getPos(),Dir.LEFT);
-            if(temp != null) {
+            if(temp != null && !temp.isImpassable()) {
                 toDo.add(new ThisIsNotAnIntPairRenameItPlease(temp, pair.getVal()-1));
             }
         }
