@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import uk.pilk.snek.Tile;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -29,11 +30,21 @@ public class Board {
         for(int pos = 0; pos < height * width; pos++) {
             grid[pos] = new Tile(pos%width,pos/width);
         }
+
+        food = setObjectsToGrid(food);
+        hazards = setObjectsToGrid(hazards);
         /*for (Tile tile : tiles) {
             grid[tileToGrid(tile)] = tile;
         }*/
     }
 
+    private List<Tile> setObjectsToGrid(List<Tile> toConvert){
+        List<Tile> temp = new ArrayList<>();
+        for(Tile tile : food) {
+            temp.add(grid[tileToGrid(tile)]);
+        }
+        return temp;
+    }
     public void populateDesires(Snek self) {
         populateSnakes(self);
         populateFoodDesire(self);
