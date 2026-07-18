@@ -224,9 +224,9 @@ public class Board {
         //prevent OOB
         if (temp < 0 || temp >= grid.length)
             return null;
-        if (direction == Dir.RIGHT && temp / width + 1 == width) {
+        if (direction == Dir.RIGHT && temp % width == 0) {
             return null;
-        } else if (direction == Dir.LEFT && temp % width == 0){
+        } else if (direction == Dir.LEFT && (temp / width) + 1 == width){
             return null;
         }
         return grid[temp];
