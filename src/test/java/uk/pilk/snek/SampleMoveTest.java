@@ -27,6 +27,10 @@ public class SampleMoveTest {
 
     @Test
     public void test() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/start")
+                .content(resourceFile.getContentAsByteArray())
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk());
         mockMvc.perform(MockMvcRequestBuilders.post("/move")
                 .content(resourceFile.getContentAsByteArray())
                 .contentType(MediaType.APPLICATION_JSON)
