@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import uk.pilk.snek.Tile;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 @Data
 @AllArgsConstructor
@@ -105,7 +102,7 @@ public class Board {
 
     private void iterFoodWeight(Tile start){
         HashSet<Tile> set = new HashSet<>();
-        PriorityQueue<ThisIsNotAnIntPairRenameItPlease> toDo = new  PriorityQueue<>();
+        PriorityQueue<ThisIsNotAnIntPairRenameItPlease> toDo = new PriorityQueue<>(Comparator.reverseOrder());
         toDo.add(new ThisIsNotAnIntPairRenameItPlease(start, foodMax));
         Tile temp;
         ThisIsNotAnIntPairRenameItPlease pair;
