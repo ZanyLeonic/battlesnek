@@ -29,7 +29,7 @@ public class SnekController {
     @PostMapping("/start")
     void SnekStart(@RequestBody GameStatusRequest startInfo) {
         history.add(new ArrayList<>());
-        log.warn("SnekStart");
+//        log.warn("SnekStart");
     }
 
     @PostMapping("/move")
