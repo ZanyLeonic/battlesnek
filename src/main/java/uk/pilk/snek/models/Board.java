@@ -242,6 +242,6 @@ public class Board {
             }
             curr.add(this.grid[i]);
         }
-        return tiles;
+        return tiles.reversed(); //reverse as the official visualisation has 0,0 at bottom-left
     }
 }
