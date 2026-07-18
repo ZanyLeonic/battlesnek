@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import uk.pilk.snek.Tile;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.*;
 
 @Data
@@ -228,5 +230,18 @@ public class Board {
             return null;
         }
         return grid[temp];
+    }
+
+    public List<? extends List<Tile>> mapToRows(){
+        ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
+        ArrayList<Tile> curr = new ArrayList<>();
+        for (int i = 0; i < this.grid.length; i++) {
+            if (i % this.width == 0){
+                curr = new ArrayList<>();
+                tiles.add(curr);
+            }
+            curr.add(this.grid[i]);
+        }
+        return tiles;
     }
 }
