@@ -78,30 +78,6 @@ public class Board {
         }
     }
 
-    private void recFoodWeight(HashSet<Tile> set, Tile current, int val){
-        if(set.contains(current)) {
-            return;
-        }
-        current.modifyWeight(val, foodMax);
-        set.add(current);
-        Tile temp = getTile(current,Dir.UP);
-        if(temp != null) {
-            recFoodWeight(set, temp, val-1);
-        }
-        temp = getTile(current,Dir.RIGHT);
-        if(temp != null) {
-            recFoodWeight(set, temp, val-1);
-        }
-        temp = getTile(current,Dir.DOWN);
-        if(temp != null) {
-            recFoodWeight(set, temp, val-1);
-        }
-        temp = getTile(current,Dir.LEFT);
-        if(temp != null) {
-            recFoodWeight(set, temp, val-1);
-        }
-    }
-
     private void iterFoodWeight(Tile start){
         HashSet<Tile> set = new HashSet<>();
         PriorityQueue<ThisIsNotAnIntPairRenameItPlease> toDo = new PriorityQueue<>(Comparator.reverseOrder());
