@@ -21,7 +21,6 @@ public class SnekController {
 
     int gameCount = 0;
     ArrayList<ArrayList<Board>> history = new ArrayList<>();
-    GameStatusRequest incoming = null;
 
     @GetMapping("/")
     SnekInfo SnakeInfo() {
@@ -35,9 +34,6 @@ public class SnekController {
 
     @PostMapping("/move")
     MoveOutput SnekMove(@RequestBody GameStatusRequest moveInfo) {
-        if (incoming == null){
-            incoming = moveInfo;
-        }
         Board board = moveInfo.getBoard();
         board.createTiled();
 
@@ -47,11 +43,6 @@ public class SnekController {
         Direction move = snek.findNext(board);
         history.get(gameCount).add(moveInfo.getBoard());
         return new MoveOutput(move, move.toString());
-    }
-
-    @GetMapping("/debug")
-    GameStatusRequest debug(){
-        return incoming;
     }
 
     @PostMapping("/end")
