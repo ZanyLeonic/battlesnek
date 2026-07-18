@@ -3,9 +3,11 @@ package uk.pilk.snek;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(of = {"x", "y"})
 public class Tile {
 
     private final int x,y;

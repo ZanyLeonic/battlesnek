@@ -8,6 +8,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.server.ResponseStatusException;
+import tools.jackson.core.JacksonException;
 import tools.jackson.databind.exc.MismatchedInputException;
 import uk.pilk.snek.models.*;
 
@@ -39,9 +40,9 @@ public class SnekController {
         Snek snek = moveInfo.getYou();
         board.populateDesires(snek);
 
-        String move = snek.findNext(board);
+        Direction move = snek.findNext(board);
         history.get(gameCount).add(moveInfo.getBoard());
-        return new MoveOutput(move, move);
+        return new MoveOutput(move, move.toString());
     }
 
     @PostMapping("/end")
@@ -63,7 +64,7 @@ public class SnekController {
     {
         MismatchedInputException jme = (MismatchedInputException) ex.getCause();
         log.error(ex.getMessage() + " -> " + jme.getPath().stream()
-                .map(err -> err.getPropertyName())
+                .map(JacksonException.Reference::getDescription)
                 .collect(Collectors.joining("; ")));
         return jme.getLocalizedMessage();
     }

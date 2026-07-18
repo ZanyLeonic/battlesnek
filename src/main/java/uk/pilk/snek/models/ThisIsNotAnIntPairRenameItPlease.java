@@ -5,18 +5,18 @@ import org.jspecify.annotations.NonNull;
 import uk.pilk.snek.Tile;
 
 @Data
-public class IntPair implements Comparable<IntPair>{
+public class ThisIsNotAnIntPairRenameItPlease implements Comparable<ThisIsNotAnIntPairRenameItPlease>{
 
     private int val;
     private Tile pos;
 
-    public IntPair(Tile pos, int val){
+    public ThisIsNotAnIntPairRenameItPlease(Tile pos, int val){
         this.val = val;
         this.pos = pos;
     }
 
     @Override
-    public int compareTo(@NonNull IntPair intPair) {
+    public int compareTo(@NonNull ThisIsNotAnIntPairRenameItPlease intPair) {
         return Integer.compare(this.val, intPair.val);
     }
 }

@@ -52,10 +52,10 @@ public class Board {
             }
             //Desire to go head to head or not
             if (snake.getLength() >= self.getLength()) {
-                safeGridModify(snake.getHead(), Dir.UP, -5);
-                safeGridModify(snake.getHead(), Dir.RIGHT, -5);
-                safeGridModify(snake.getHead(), Dir.DOWN, -5);
-                safeGridModify(snake.getHead(), Dir.LEFT, -5);
+                safeGridTileUpdate(snake.getHead(), Dir.UP, -5);
+                safeGridTileUpdate(snake.getHead(), Dir.RIGHT, -5);
+                safeGridTileUpdate(snake.getHead(), Dir.DOWN, -5);
+                safeGridTileUpdate(snake.getHead(), Dir.LEFT, -5);
             }
         }
     }
@@ -94,10 +94,10 @@ public class Board {
 
     private void iterFoodWeight(Tile start){
         HashSet<Tile> set = new HashSet<>();
-        PriorityQueue<IntPair> toDo = new  PriorityQueue<>();
-        toDo.add(new IntPair(start, foodMax));
+        PriorityQueue<ThisIsNotAnIntPairRenameItPlease> toDo = new  PriorityQueue<>();
+        toDo.add(new ThisIsNotAnIntPairRenameItPlease(start, foodMax));
         Tile temp;
-        IntPair pair;
+        ThisIsNotAnIntPairRenameItPlease pair;
         while(!toDo.isEmpty()) {
             pair = toDo.poll();
             if(set.contains(pair.getPos())){
@@ -108,19 +108,19 @@ public class Board {
 
             temp = getTile(pair.getPos(),Dir.UP);
             if(temp != null) {
-                toDo.add(new IntPair(temp, pair.getVal()-1));
+                toDo.add(new ThisIsNotAnIntPairRenameItPlease(temp, pair.getVal()-1));
             }
             temp = getTile(pair.getPos(),Dir.RIGHT);
             if(temp != null) {
-                toDo.add(new IntPair(temp, pair.getVal()-1));
+                toDo.add(new ThisIsNotAnIntPairRenameItPlease(temp, pair.getVal()-1));
             }
             temp = getTile(pair.getPos(),Dir.DOWN);
             if(temp != null) {
-                toDo.add(new IntPair(temp, pair.getVal()-1));
+                toDo.add(new ThisIsNotAnIntPairRenameItPlease(temp, pair.getVal()-1));
             }
             temp = getTile(pair.getPos(),Dir.LEFT);
             if(temp != null) {
-                toDo.add(new IntPair(temp, pair.getVal()-1));
+                toDo.add(new ThisIsNotAnIntPairRenameItPlease(temp, pair.getVal()-1));
             }
         }
     }
@@ -131,8 +131,8 @@ public class Board {
      * @param head Head position
      * @return Chosen direction to move
      */
-    public String returnChosenDirection(Tile head) {
-        String favoured = "error";
+    public Direction returnChosenDirection(Tile head) {
+        Direction favoured = null;
         int favourWeight = Integer.MIN_VALUE, headPos = tileToGrid(head), temp;
         Tile considered;
 
@@ -142,7 +142,7 @@ public class Board {
                 temp = considered.getWeight();
                 if (favourWeight < temp) {
                     favourWeight = temp;
-                    favoured = "down";
+                    favoured = Direction.DOWN;
                 }
             }
         }
@@ -154,7 +154,7 @@ public class Board {
                 temp = grid[temp].getWeight();
                 if (favourWeight < temp) {
                     favourWeight = temp;
-                    favoured = "right";
+                    favoured = Direction.RIGHT;
                 }
             }
         }
@@ -165,7 +165,7 @@ public class Board {
                 temp = grid[headPos + width].getWeight();
                 if (favourWeight < temp) {
                     favourWeight = temp;
-                    favoured = "up";
+                    favoured = Direction.UP;
                 }
             }
         }
@@ -176,7 +176,7 @@ public class Board {
             if(!considered.isImpassable()) {
                 temp = grid[temp].getWeight();
                 if (favourWeight < temp) {
-                    favoured = "left";
+                    favoured = Direction.LEFT;
                 }
             }
         }
@@ -189,105 +189,35 @@ public class Board {
     }
 
     private void safeGridSet(Tile tile, Dir direction, int mod) {
-        int temp;
-        switch (direction) {
-            case UP:
-                temp = tileToGrid(tile) + width;
-                if (temp >= grid.length) {
-                    return;
-                }
-                break;
-            case RIGHT:
-                temp = tileToGrid(tile) + 1;
-                if (temp / width + 1 == width || temp >= grid.length) {
-                    return;
-                }
-                break;
-            case DOWN:
-                temp = tileToGrid(tile) - width;
-                if (temp <= 0) {
-                    return;
-                }
-                break;
-            case LEFT:
-                temp = tileToGrid(tile) - 1;
-                if (temp % width == 0 || temp <= 0) {
-                    return;
-                }
-                break;
-            default:
-                return;
-
-        }
-        grid[temp].setWeight(mod);
+        var toModify = getTile(tile, direction);
+        if (toModify != null)
+            toModify.setWeight(mod);
     }
 
-    private void safeGridModify(Tile tile, Dir direction, int mod) {
-        safeGridModify(tile, direction, mod, Integer.MAX_VALUE);
+    private void safeGridTileUpdate(Tile tile, Dir direction, int mod) {
+        safeGridTileUpdate(tile, direction, mod, Integer.MAX_VALUE);
     }
 
-    private void safeGridModify(Tile tile, Dir direction, int mod, int max) {
-        int temp;
-        switch (direction) {
-            case UP:
-                temp = tileToGrid(tile) + width;
-                if (temp >= grid.length) {
-                    return;
-                }
-                break;
-            case RIGHT:
-                temp = tileToGrid(tile) + 1;
-                if (temp / width + 1 == width || temp >= grid.length) {
-                    return;
-                }
-                break;
-            case DOWN:
-                temp = tileToGrid(tile) - width;
-                if (temp < 0) {
-                    return;
-                }
-                break;
-            case LEFT:
-                temp = tileToGrid(tile) - 1;
-                if (temp % width == 0 || temp < 0) {
-                    return;
-                }
-                break;
-            default:
-                return;
-        }
-        grid[temp].modifyWeight(mod, max);
+    private void safeGridTileUpdate(Tile tile, Dir direction, int mod, int max) {
+        var toModify = getTile(tile, direction);
+        if (toModify != null)
+            toModify.modifyWeight(mod, max);
     }
 
     private Tile getTile(Tile tile, Dir direction){
-        int temp;
-        switch (direction) {
-            case UP:
-                temp = tileToGrid(tile) + width;
-                if (temp >= grid.length) {
-                    return null;
-                }
-                break;
-            case RIGHT:
-                temp = tileToGrid(tile) + 1;
-                if (temp / width + 1 == width || temp >= grid.length) {
-                    return null;
-                }
-                break;
-            case DOWN:
-                temp = tileToGrid(tile) - width;
-                if (temp < 0) {
-                    return null;
-                }
-                break;
-            case LEFT:
-                temp = tileToGrid(tile) - 1;
-                if (temp % width == 0 || temp < 0) {
-                    return null;
-                }
-                break;
-            default:
-                return null;
+        int temp = tileToGrid(tile) + switch (direction) {
+            case UP -> width;
+            case DOWN -> -width;
+            case LEFT -> -1;
+            case RIGHT -> 1;
+        };
+        //prevent OOB
+        if (temp < 0 || temp >= grid.length)
+            return null;
+        if (direction == Dir.RIGHT && temp / width + 1 == width) {
+            return null;
+        } else if (direction == Dir.LEFT && temp % width == 0){
+            return null;
         }
         return grid[temp];
     }

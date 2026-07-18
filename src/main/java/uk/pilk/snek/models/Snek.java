@@ -24,7 +24,7 @@ public class Snek {
     @JsonProperty("customizations")
     private SnakeCustomisations customisations;
 
-    public String findNext(Board board){
+    public Direction findNext(Board board){
         return board.returnChosenDirection(head);
     }
 }

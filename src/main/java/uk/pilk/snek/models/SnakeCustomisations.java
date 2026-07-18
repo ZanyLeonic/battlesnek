@@ -8,7 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class SnakeCustomisations {
 
-    @JsonProperty("colour")
+    @JsonProperty("color")
     private String colour;
     private String head;
     private String tail;
