@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.nio.file.Files;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -35,5 +36,7 @@ public class SampleMoveTest {
                 .content(resourceFile.getContentAsByteArray())
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders.get("/gameHistoryPage/0/0"))
+                .andDo(print());
     }
 }

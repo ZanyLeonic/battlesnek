@@ -9,10 +9,12 @@
         <th:block th:each="tiles : ${board.mapToRows()}">
             <tr>
                 <th:block th:each="tile : ${tiles}">
-                    <td th:text="${tile.weight}"></td>
+                    <td th:text="${tile.weight}" th:style="'background-color: rgb(' + (${tile.weight} *2.5) + ',0,0)'"></td>
                 </th:block>
             </tr>
         </th:block>
     </table>
+    <a th:href="@{/gameHistoryPage/{gameId}/{boardId}(gameId=${gameId}, boardId=${boardId-1})}">Prev</a>
+    <a th:href="@{/gameHistoryPage/{gameId}/{boardId}(gameId=${gameId}, boardId=${boardId+1})}">Next</a>
 </body>
 </html>
