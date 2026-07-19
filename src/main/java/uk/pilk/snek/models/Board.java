@@ -46,7 +46,9 @@ public class Board {
     }
     public void populateDesires(Snek self) {
         populateSnakes(self);
+        populateTraps(self);
         populateFoodDesire(self);
+        populateCollision(self);
     }
 
     private void populateSnakes(Snek self) {
@@ -55,19 +57,59 @@ public class Board {
             for (Tile tile : snake.getPositions()) {
                 grid[tileToGrid(tile)].setImpassable();
             }
+        }
+    }
 
+    private void populateCollision(Snek self) {
+        for(Snek snake: snakes) {
             //No need to look at anything else if it's yourself?
             if (snake.getId().equals(self.getId())) {
                 continue;
             }
+
             //Desire to go head to head or not
+            int collisionDesire = 20;
             if (snake.getLength() >= self.getLength()) {
-                safeGridTileUpdate(snake.getHead(), Dir.UP, -5);
-                safeGridTileUpdate(snake.getHead(), Dir.RIGHT, -5);
-                safeGridTileUpdate(snake.getHead(), Dir.DOWN, -5);
-                safeGridTileUpdate(snake.getHead(), Dir.LEFT, -5);
+                collisionDesire = -5;
             }
+            safeGridTileUpdate(snake.getHead(), Dir.UP, collisionDesire);
+            safeGridTileUpdate(snake.getHead(), Dir.RIGHT, collisionDesire);
+            safeGridTileUpdate(snake.getHead(), Dir.DOWN, collisionDesire);
+            safeGridTileUpdate(snake.getHead(), Dir.LEFT, collisionDesire);
         }
+    }
+
+    private void populateTraps(Snek self) {
+        Set<Tile> headChoices = new HashSet<>();
+        Tile temp = getTile(self.getHead(), Dir.UP);
+        if (temp != null) {
+            headChoices.add(temp);
+        }
+        temp = getTile(self.getHead(), Dir.RIGHT);
+        if (temp != null) {
+            headChoices.add(temp);
+        }
+        temp = getTile(self.getHead(), Dir.DOWN);
+        if (temp != null) {
+            headChoices.add(temp);
+        }
+        temp = getTile(self.getHead(), Dir.LEFT);
+        if (temp != null) {
+            headChoices.add(temp);
+        }
+
+
+    }
+
+    private List<Tile> longestPath(Tile start){
+        int depth = 0;
+        List<Tile> path = new ArrayList<>();
+
+        return path;
+    }
+
+    private List<Tile> recLongest(){
+        return null;
     }
 
     private static int foodMax = 100;
